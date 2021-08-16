@@ -1,0 +1,78 @@
+﻿@model List<Entity.MarcaVehiculoEntity>
+
+<div class="container">
+
+    <div class="card">
+        <div class="card-header">
+            Marca Vehiculo
+        </div>
+        <div class="card-body">
+           
+            <a class="btn btn-outline-primary" asp-controller="MarcaVehiculo" asp-action="Edit">
+                <i class='bx bx-add-to-queue'></i>
+            </a>
+
+            <div class="row">
+                
+                <div class="col-12">
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Descripcion</th>
+                                <th>Estado</th>
+                                <th>Accion</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <td>@item.MarcaVehiculoId</td>
+                                <td>@item.Descripcion</td>
+                                <td>@(item.Estado ?"Activo" :"Inactivo")</td>
+                                <td>
+                                    <a class="btn btn-outline-primary" asp-controller="MarcaVehiculo" asp-action="Edit" asp-route-id="@item.MarcaVehiculoId">
+                                        <i class='bx bx-edit-alt'></i>
+                                    </a>
+                                    <button type="button" class="btn btn-outline-danger"
+                                            onclick="OnClickEliminar(@item.MarcaVehiculoId)">
+                                        <i class='bx bx-trash'></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+@section Scripts{ 
+
+    <script>
+
+        function OnClickEliminar(id) {
+            var elimina = confirm("Desea eliminar este registro!");
+
+            if (elimina) {
+                window.location.href="MarcaVehiculo/Eliminar/"+id
+            }
+        }
+
+    </script>
+
+}

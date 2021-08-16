@@ -8,7 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using BD;
+using WBL;
 namespace WebApp
 {
     public class Startup
@@ -23,6 +24,9 @@ namespace WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IDataAccess,DataAccess>();
+            services.AddTransient<IMarcaVehiculoService, MarcaVehiculoService>();
+
             services.AddControllersWithViews();
         }
 
